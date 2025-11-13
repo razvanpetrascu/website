@@ -804,7 +804,7 @@ body.menu-open #menu-open-button {
         gap: 16px;
     }
 
-    /* Force cards to fully fit viewport width on mobile */
+    /* Force cards to fully fit viewport width on mobile test */
     .video-container {
         flex: 0 0 100%;
         max-width: 100%;
