@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vimeoContainers.forEach(fitVimeoInContainer);
     };
 
-    // Debounce to avoid thrash on rapid window drags
+    // Debounce to avoid thrash on rapid window draggins
     let _resizeTimer = null;
     const debouncedVimeoReflow = () => {
         clearTimeout(_resizeTimer);
