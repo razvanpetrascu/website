@@ -53,6 +53,119 @@ document.addEventListener('DOMContentLoaded', () => {
         fitAllVimeoToViewport();
     };
 
+    // --- Per-section snap scroll (1 category per swipe/wheel when snap is ON) ---
+    const initializeSnapScrollPerSection = () => {
+        if (!scrollContainer) return;
+        const snapSections = Array.from(document.querySelectorAll('.snap-point'));
+        if (!snapSections.length) return;
+
+        let currentIndex = 0;
+        let isAnimating = false;
+        let touchStartY = null;
+        let touchLastY = null;
+        let syncTimer = null;
+
+        const findNearestIndex = () => {
+            const scrollTop = scrollContainer.scrollTop;
+            let bestIdx = 0;
+            let bestDist = Infinity;
+            snapSections.forEach((sec, idx) => {
+                const dist = Math.abs(sec.offsetTop - scrollTop);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestIdx = idx;
+                }
+            });
+            return bestIdx;
+        };
+
+        const scrollToIndex = (idx) => {
+            if (idx < 0 || idx >= snapSections.length) return;
+            isAnimating = true;
+            const target = snapSections[idx].offsetTop;
+            scrollContainer.scrollTo({ top: target, behavior: 'smooth' });
+            currentIndex = idx;
+            setTimeout(() => { isAnimating = false; }, 500);
+        };
+
+        // Keep index in sync when user lands on a section from other interactions
+        scrollContainer.addEventListener('scroll', () => {
+            if (!scrollContainer.classList.contains('snap-on')) return;
+            if (isAnimating) return;
+            clearTimeout(syncTimer);
+            syncTimer = setTimeout(() => {
+                currentIndex = findNearestIndex();
+            }, 120);
+        });
+
+        // Wheel: force single-step scroll between sections
+        scrollContainer.addEventListener('wheel', (e) => {
+            if (!scrollContainer.classList.contains('snap-on')) return;
+            if (e.deltaY === 0) return;
+            e.preventDefault();
+            if (isAnimating) return;
+            const dir = e.deltaY > 0 ? 1 : -1;
+            const targetIndex = Math.min(
+                snapSections.length - 1,
+                Math.max(0, currentIndex + dir)
+            );
+            if (targetIndex === currentIndex) return;
+            scrollToIndex(targetIndex);
+        }, { passive: false });
+
+        // Touch: swipe up/down = single section step
+        scrollContainer.addEventListener('touchstart', (e) => {
+            if (!scrollContainer.classList.contains('snap-on')) return;
+            if (e.touches.length !== 1) return;
+            touchStartY = e.touches[0].clientY;
+            touchLastY = touchStartY;
+        }, { passive: true });
+
+        scrollContainer.addEventListener('touchmove', (e) => {
+            if (!scrollContainer.classList.contains('snap-on')) return;
+            if (touchStartY == null) return;
+            touchLastY = e.touches[0].clientY;
+            // We take over vertical scroll when snap is ON
+            e.preventDefault();
+        }, { passive: false });
+
+        scrollContainer.addEventListener('touchend', () => {
+            if (!scrollContainer.classList.contains('snap-on')) {
+                touchStartY = null;
+                touchLastY = null;
+                return;
+            }
+            if (touchStartY == null || touchLastY == null) {
+                touchStartY = null;
+                touchLastY = null;
+                return;
+            }
+            const dy = touchStartY - touchLastY;
+            const threshold = 40;
+
+            if (Math.abs(dy) < threshold) {
+                // Tiny movement: snap back to nearest section
+                currentIndex = findNearestIndex();
+                scrollToIndex(currentIndex);
+            } else if (!isAnimating) {
+                const dir = dy > 0 ? 1 : -1;
+                const targetIndex = Math.min(
+                    snapSections.length - 1,
+                    Math.max(0, currentIndex + dir)
+                );
+                if (targetIndex !== currentIndex) {
+                    scrollToIndex(targetIndex);
+                }
+            }
+
+            touchStartY = null;
+            touchLastY = null;
+        });
+
+        // Initial index
+        currentIndex = findNearestIndex();
+    };
+
     // --- Hero letters (title/subtitle per your existing UX) ---
     const initializeHeroTextAnimation = () => {
         const header = document.querySelector('header#home');
@@ -545,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerMarV= getNumber(cStyle.marginTop)  + getNumber(cStyle.marginBottom);
 
         const viewportH = scrollContainer.clientHeight;
-        const buffer = 24;
+        const buffer = 40; // a bit more breathing room so nothing is clipped
 
         let availableH = viewportH
             - titleH
@@ -725,6 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeVideoInfoOverlay();
     initializeBackgroundInteraction();
     initializeAutoPause();
+    initializeSnapScrollPerSection();
 
     // Initial fit + debounced resize wiring
     requestAnimationFrame(() => { 
