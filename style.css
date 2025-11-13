@@ -187,7 +187,6 @@ section h3 {
     text-align: left;
     position: relative;
 }
-
 .category-title {
     opacity: 0;
     transform: translateY(12px);
@@ -804,7 +803,7 @@ body.menu-open #menu-open-button {
         gap: 16px;
     }
 
-    /* Force cards to fully fit viewport width on mobile test */
+    /* Force cards to fully fit viewport width on mobile */
     .video-container {
         flex: 0 0 100%;
         max-width: 100%;
