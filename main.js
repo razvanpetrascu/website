@@ -302,6 +302,12 @@ document.addEventListener('DOMContentLoaded', () => {
         scroller.addEventListener('scroll', () => { updateCurrentFromScroll(); dismissHint(); });
         scroller.addEventListener('pointerdown', dismissHint, { once: true });
 
+        window.addEventListener('vimeo-fitted', () => {
+            computeVideoCenters();
+            updateButtonVisibility();
+            updateEdgeFades();
+        });
+
         window.addEventListener('resize', () => {
             computeVideoCenters();
             updateButtonVisibility();
@@ -677,6 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .map(f => f.closest('.video-container'))
             .filter(Boolean);
         vimeoContainers.forEach(fitVimeoInContainer);
+        window.dispatchEvent(new CustomEvent('vimeo-fitted'));
     };
 
     let _resizeTimer = null;
