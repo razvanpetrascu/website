@@ -1,15 +1,4 @@
-/*
-[CHANGES 2025-11-12]
-- Scroll arrows:
-  • Removed top overlay/shine (no ::before glow), kept hover effect as before.
-  • Reduced corner radius by ~80% (e.g., 14px → ~3px).
-  • Width is now forced to 50% of the original via JS (keeps height the same and glyphs centered—no squashing).
-- Arrow attention animation class (.attn-swing): exactly 2 swings per cycle, used by JS every ~5s when visible.
-- Per-video descriptions hidden (kept in DOM for "i" overlay content) and vertical spacing tightened.
-- Header description line (.hero-about) now has a subtle once-only fade-up; prefers-reduced-motion disables it.
-*/
 
-/* Base */
 html, body {
     height: 100%;
     overflow: hidden;
@@ -22,10 +11,10 @@ html, body {
     --twinkle-b: 0.6;
     --twinkle-c: 0.5;
 
-    --green-1: 34,139,34; /* forestgreen rgb for accents */
+    --green-1: 34,139,34; 
 
     background-color: #000;
-    /* Starfield dots */
+    
     background-image:
         radial-gradient(1px 1px at 5% 10%, rgba(255,255,255,var(--twinkle-a)), transparent),
         radial-gradient(1.4px 1.4px at 12% 45%, rgba(255,255,255,var(--twinkle-a)), transparent),
@@ -67,7 +56,6 @@ html, body {
     background-position: 0 0;
 }
 
-/* Interactive orbs layer */
 .interactive-bg { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
 .orb {
     position: absolute;
@@ -82,14 +70,12 @@ html, body {
 .orb.o2 { right: 15%; top: 30%; background: radial-gradient(circle, rgba(120,255,200,0.28), transparent 60%); }
 .orb.o3 { left: 25%; bottom: 10%; background: radial-gradient(circle, rgba(180,255,180,0.22), transparent 60%); }
 
-/* Scroll container */
 #scroll-container.snap-on { scroll-snap-type: y mandatory; }
 #scroll-container {
     height: 100%;
     overflow-y: auto;
 }
 
-/* Sections */
 .snap-point {
     display: flex;
     flex-direction: column;
@@ -97,7 +83,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/* Keep hero and footer centered; content sections start from top */
 header.snap-point,
 footer.snap-point {
     justify-content: center;
@@ -111,7 +96,6 @@ footer.snap-point {
 
 .snap-point { scroll-snap-align: start; }
 
-/* Hero */
 header {
     text-align: center;
     padding: 80px 20px 60px;
@@ -131,7 +115,6 @@ header::after {
 header.snap-point { min-height: auto; }
 header h1, header h2 { margin: 0; }
 
-/* Animated hero characters (existing) */
 .hero-char {
     display: inline-block;
     opacity: 0;
@@ -153,7 +136,6 @@ header h1, header h2 { margin: 0; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Subtle one-time animation for the header description line */
 .hero-about {
     margin: 14px auto 0;
     max-width: 720px;
@@ -170,7 +152,6 @@ header h1, header h2 { margin: 0; }
     transform: translateY(0);
 }
 
-/* Content width */
 main {
     padding: 20px;
     max-width: 1010px;
@@ -179,11 +160,10 @@ main {
     box-sizing: border-box;
 }
 
-/* Category titles */
 section h3 {
     font-size: 2em;
-    margin-bottom: 8px;   /* was 20px */
-    padding-bottom: 4px;  /* was 10px */
+    margin-bottom: 8px;   
+    padding-bottom: 4px;  
     text-align: left;
     position: relative;
 }
@@ -211,14 +191,12 @@ section h3 {
     width: 100%;
 }
 
-/* Horizontal scrollers */
 .videos-navigation {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-/* Edge fades */
 .videos-navigation.with-edge-fade::before,
 .videos-navigation.with-edge-fade::after {
     content: "";
@@ -241,7 +219,6 @@ section h3 {
 .videos-navigation.show-left-fade::before { opacity: 1; }
 .videos-navigation.show-right-fade::after { opacity: 1; }
 
-/* Scroll hint */
 .scroll-hint {
     position: absolute;
     right: 16px;
@@ -282,7 +259,6 @@ section h3 {
     background: rgba(var(--green-1), 1);
 }
 
-/* Video item sizing (Vimeo items are dynamically sized via JS) */
 .video-container {
     flex: 0 0 400px;
     max-width: 90vw;
@@ -295,13 +271,11 @@ section h3 {
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Long-form (YouTube) wider, but always clamped to viewport width */
 .video-container-landscape {
     flex: 0 0 min(840px, 100%);
     max-width: 100%;
 }
 
-/* Staggered fade for items */
 .video-category.section-in-view .videos-scroller .video-container:nth-child(1) {
     opacity: 1;
     transform: translateY(0);
@@ -333,7 +307,6 @@ section h3 {
     transition-delay: 0.8s;
 }
 
-/* 16:9 wrapper for landscape players */
 .video-player-container {
     position: relative;
     width: 100%;
@@ -348,7 +321,6 @@ section h3 {
     height: 100%;
 }
 
-/* Explicit-height Vimeo wrapper fallback */
 .video-container > div[style*="position:relative"] iframe {
     width: 100%;
     height: 100%;
@@ -356,7 +328,6 @@ section h3 {
     inset: 0;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -405,7 +376,6 @@ footer .copyright {
     font-size: 0.9em;
 }
 
-/* -------- ARROWS: visual tweaks -------- */
 .scroll-button {
     position: relative;
     flex: 0 0 auto;
@@ -415,10 +385,10 @@ footer .copyright {
     border: 1px solid rgba(255,255,255,0.18);
     font-size: 2em;
     line-height: 1;
-    /* keep the current height via vertical padding only */
-    padding: 63px 3px; /* your previous vertical dimension preserved */
+    
+    padding: 63px 3px; 
     cursor: pointer;
-    border-radius: 3px; /* ~80% less rounding */
+    border-radius: 3px; 
     transition:
         background-color 0.25s,
         opacity 0.25s,
@@ -432,11 +402,10 @@ footer .copyright {
     align-items: center;
     justify-content: center;
 
-    /* Width is set to 50% of original by JS after first layout; glyph stays centered */
-    width: auto; /* JS will override with explicit px */
+    
+    width: auto; 
 }
 
-/* Hover: keep your existing bottom-ish glow/feel */
 .scroll-button:hover {
     background-color: rgba(0, 0, 0, 0.82);
     border-color: rgba(255,255,255,0.4);
@@ -449,7 +418,6 @@ footer .copyright {
     pointer-events: none;
 }
 
-/* Attention animation: exactly 2 swings (JS adds/removes .attn-swing every ~5s if visible) */
 @keyframes attnSwing {
     0%, 100% { transform: translateX(0); }
     25%      { transform: translateX(-4px); }
@@ -459,7 +427,6 @@ footer .copyright {
     animation: attnSwing 0.6s ease-in-out 2;
 }
 
-/* Video header row */
 .video-header {
     display: flex;
     justify-content: space-between;
@@ -474,7 +441,6 @@ footer .copyright {
     font-size: 1.2em;
 }
 
-/* Info button */
 .video-info-button {
     width: 24px;
     height: 24px;
@@ -503,7 +469,6 @@ footer .copyright {
     transform: scale(1.05);
 }
 
-/* Menu (unchanged) */
 .hamburger-menu {
     width: 50px;
     height: 50px;
@@ -539,7 +504,6 @@ body.menu-open #scroll-down-button {
     pointer-events: none;
 }
 
-/* Menu overlay (fade) */
 #menu-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -555,10 +519,10 @@ body.menu-open #scroll-down-button {
 #menu-overlay.visible {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 #menu-overlay.fading-out { opacity: 0; }
 
-/* Menu container */
 #menu-container {
     position: fixed;
     top: 80px;
@@ -581,7 +545,6 @@ body.menu-open #menu-container {
     transform: translateY(0);
 }
 
-/* Controls row */
 .menu-controls {
     background: rgba(0,0,0,0.9);
     border: 1px solid #333;
@@ -594,7 +557,6 @@ body.menu-open #menu-container {
     min-width: 220px;
 }
 
-/* Menu box */
 #main-menu {
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 16px;
@@ -633,7 +595,6 @@ body.menu-open #menu-open-button {
     pointer-events: none;
 }
 
-/* Switch UI */
 .switch {
     position: relative;
     display: inline-flex;
@@ -674,7 +635,6 @@ body.menu-open #menu-open-button {
     background: #fff;
 }
 
-/* Info overlay (fade + origin-based dialog morph) */
 #video-info-overlay {
     position: fixed;
     inset: 0;
@@ -716,7 +676,6 @@ body.menu-open #menu-open-button {
     user-select: none;
 }
 
-/* Origin animations */
 @keyframes infoGrowFrom {
     0% {
         opacity: 0;
@@ -748,14 +707,12 @@ body.menu-open #menu-open-button {
     animation: infoShrinkTo 0.22s cubic-bezier(.2,.7,.2,1) forwards;
 }
 
-/* Hide per-video description text above each card (kept for the "i" overlay) */
 .video-description-text {
     display: none !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .hero-char,
     .category-title,
@@ -773,13 +730,11 @@ body.menu-open #menu-open-button {
     }
 }
 
-/* Mobile tweaks */
 @media (max-width: 768px) {
     main {
         padding: 20px 16px 140px;
     }
 
-    /* Slightly smaller, tighter hero text so name fits on one line */
     .hero-char-title {
         font-size: clamp(1.9rem, 7vw, 2.3rem);
         letter-spacing: 0.035em;
@@ -803,7 +758,6 @@ body.menu-open #menu-open-button {
         gap: 16px;
     }
 
-    /* Force cards to fully fit viewport width on mobile */
     .video-container {
         flex: 0 0 100%;
         max-width: 100%;

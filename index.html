@@ -1,10 +1,3 @@
-<!--
-[CHANGES 2025-11-12]
-- No structural changes required for new behavior.
-- Kept per-video <div class="video-description-text"> blocks in markup so the “i” panel can still read them.
-  They are now hidden via CSS to remove the duplicate on-card descriptions.
-- Header description line (.hero-about) will animate subtly on first view (CSS/JS-driven, reduced-motion respected).
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +6,7 @@
     <title>Video Editor Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://player.vimeo.com/api/player.js" defer></script>
-    <!-- If you ever want YouTube JS API control, uncomment this:
-    <script src="https://www.youtube.com/iframe_api"></script>
-    -->
+    
     <script src="main.js" defer></script>
 </head>
 <body>
@@ -24,22 +15,11 @@
         <header id="home" class="snap-point">
             <h1>Petrașcu Răzvan</h1>
             <h2>Video Editor</h2>
-            <!-- Description line (animated once) -->
+            
         </header>
 
         <main>
-            <!-- <section id="mypicks" class="snap-point video-category" data-category="mypicks">
-                <h3 class="category-title">My Picks</h3>
-                <div class="videos-navigation with-hint with-edge-fade">
-                    <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
-                    <div class="videos-scroller" tabindex="0" aria-label="My Picks videos. Horizontal list, scrollable.">
-                        
-                    </div>
-                    <div class="scroll-hint" aria-hidden="true">Scroll →</div>
-                    <button class="scroll-button scroll-right hidden" aria-label="Scroll right" data-attn="1">&gt;</button>
-                </div>
-            </section> -->
-
+            
             <section id="popular" class="snap-point video-category" data-category="popular">
                 <h3 class="category-title">Viral Content</h3>
                 <div class="videos-navigation with-hint with-edge-fade">
@@ -48,11 +28,9 @@
                         <div class="video-container">
                             <div class="video-header">
                                 <div class="video-views">112.000 views</div>
-                                <!-- <button class="video-info-button" type="button" aria-label="Video description">i</button> -->
+                                
                             </div>
-                            <!-- <div class="video-description-text">
-                                Viral steak video – dynamic pacing and appetizing close-ups to keep viewers hooked.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1134622249?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -69,11 +47,9 @@
                         <div class="video-container">
                             <div class="video-header">
                                 <div class="video-views">109.000 views</div>
-                                <!-- <button class="video-info-button" type="button" aria-label="Video description">i</button> -->
+                                
                             </div>
-                            <!-- <div class="video-description-text">
-                                Emotional storytelling about choosing your parents – focused on pacing and emphasis.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135734505?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -90,11 +66,9 @@
                         <div class="video-container">
                             <div class="video-header">
                                 <div class="video-views">54.000 views</div>
-                                <!-- <button class="video-info-button" type="button" aria-label="Video description">i</button> -->
+                                
                             </div>
-                            <!-- <div class="video-description-text">
-                                Deep-dive on forgiving parents – balancing emotional beats with clean transitions.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135737780?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -111,11 +85,9 @@
                         <div class="video-container">
                             <div class="video-header">
                                 <div class="video-views">53.900 views</div>
-                                <!-- <button class="video-info-button" type="button" aria-label="Video description">i</button> -->
+                                
                             </div>
-                            <!-- <div class="video-description-text">
-                                High-energy city b-roll mixed with conversational framing around coffee culture.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135739103?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -142,13 +114,7 @@
                     <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
                     <div class="videos-scroller" tabindex="0" aria-label="Motion Graphics videos. Horizontal list, scrollable.">
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Playful lemonade ad break – kinetic typography and animated elements to sell the mood.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1069998534?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -159,13 +125,7 @@
                             </div>
                         </div>                        
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Character-driven motion piece around the “black sheep” archetype.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135748230?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -179,13 +139,7 @@
                             </div>
                         </div>
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Kinetic menu concept – smooth transitions and typography-focused motion.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1075998133?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -196,13 +150,7 @@
                             </div>
                         </div>
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Explainer-style animation using minimal graphics and clean timing.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135747045?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -216,13 +164,7 @@
                             </div>
                         </div>
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Narrative motion piece about life approaches – subtle animated accents.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135747423?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -236,7 +178,7 @@
                         <div class="video-container">
                             <div class="video-header">
                                 <div class="video-views">&nbsp;</div>
-                                <!-- <button class="video-info-button" type="button" aria-label="Video description">i</button> -->
+                                
                             </div>
                             <div class="video-description-text">
                                 Intimate, cinematic love-focused motion edit with gentle transitions.
@@ -257,33 +199,48 @@
             </section>
 
             <section id="ugc" class="snap-point video-category" data-category="ugc">
-                <h3 class="category-title">UGC (User Generated Content)</h3>
-                <div class="videos-navigation with-hint with-edge-fade">
-                    <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
-                    <div class="videos-scroller" tabindex="0" aria-label="UGC videos. Horizontal list, scrollable.">
-                        <!-- Dynamic Content -->
+                     <h3 class="category-title">UGC (User Generated Content)</h3>
+                    <div class="videos-navigation with-hint with-edge-fade">
+                        <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
+                        <div class="videos-scroller" tabindex="0" aria-label="UGC videos. Horizontal list, scrollable.">
+                            <div class="video-container video-container-landscape">
+                                <div class="video-player-container">
+                                    <iframe
+                                        src="https://player.vimeo.com/video/1143427462?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=cb6a398fa2"
+                                        title="UGC - Add for product"
+                                        frameborder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="video-container video-container-landscape">
+                                <div class="video-player-container">
+                                    <iframe
+                                        src="https://player.vimeo.com/video/1143427784?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=d4503c775c"
+                                        title="UGC Add with AI Person"
+                                        frameborder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll-hint" aria-hidden="true">Scroll →</div>
+                        <button class="scroll-button scroll-right" aria-label="Scroll right" data-attn="1">&gt;</button>
                     </div>
-                    <div class="scroll-hint" aria-hidden="true">Scroll →</div>
-                    <button class="scroll-button scroll-right" aria-label="Scroll right" data-attn="1">&gt;</button>
-                </div>
-            </section>
+                </section>
 
-            <!-- NEW COOKING SECTION -->
+
             <section id="cooking" class="snap-point video-category" data-category="cooking">
                 <h3 class="category-title">Cooking</h3>
                 <div class="videos-navigation with-hint with-edge-fade">
                     <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
                     <div class="videos-scroller" tabindex="0" aria-label="Cooking videos. Horizontal list, scrollable.">
                         <div class="video-container">
-                            <!--
-                            <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Cooking reel – dynamic cuts and close-ups to highlight texture and flavor.
-                            </div>
-                            -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1070008293?h=683f987c01"
                                         frameborder="0" 
@@ -292,21 +249,11 @@
                                         style="position:absolute;top:0;left:0;width:100%;height:100%;"  
                                         title="Cooking Reel"></iframe>
                             </div>
-                            <!-- <div class="video-meta">
-                                Watch on <a href="https://vimeo.com/1070008293/683f987c01" target="_blank">Vimeo</a>
-                            </div> -->
+                            
                         </div>
 
                         <div class="video-container">
-                            <!--
-                            <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Another cooking edit – focused on rhythm, steam, and satisfying sizzles.
-                            </div>
-                            -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe title="vimeo-player" src="https://player.vimeo.com/video/1069980376?h=78b2408567" 
                                 frameborder="0" 
@@ -314,16 +261,14 @@
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   
                                 allowfullscreen></iframe>
                             </div>
-                            <!-- <div class="video-meta">
-                                Watch on <a href="https://vimeo.com/1069980376" target="_blank">Vimeo</a>
-                            </div> -->
+                            
                         </div>
                     </div>
                     <div class="scroll-hint" aria-hidden="true">Scroll →</div>
                     <button class="scroll-button scroll-right" aria-label="Scroll right" data-attn="1">&gt;</button>
                 </div>
             </section>
-            <!-- END COOKING SECTION -->
+            
 
 
             <section id="longform" class="snap-point video-category" data-category="longform">
@@ -332,13 +277,7 @@
                     <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
                     <div class="videos-scroller" tabindex="0" aria-label="Long-form videos. Horizontal list, scrollable.">
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/-gRPZjoV20c?si=TyubwH_2eKTYXWsI&enablejsapi=1"
@@ -354,13 +293,7 @@
                         </div>
 
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/P7f8-8XxCfs?si=cNux2mcu8uar6mD7&enablejsapi=1"
@@ -376,13 +309,7 @@
                         </div>
 
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/D_Kh0clMFno?si=MnVQeyUApHxmlgfU&enablejsapi=1"
@@ -398,13 +325,7 @@
                         </div>
 
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Deep dive episode – longer pacing, more breathing room between emotional beats.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/2Xacjr2Ai2U?si=PPKbkAzkitpMnsx5&enablejsapi=1"
@@ -420,13 +341,7 @@
                         </div>
 
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Reflective long-form video – steady pacing and clean cuts for clarity.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/IWzYDlYwAqs?si=1gzVQDp27uMSENaZ&enablejsapi=1"
@@ -452,13 +367,7 @@
                     <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
                     <div class="videos-scroller" tabindex="0" aria-label="Long-form videos. Horizontal list, scrollable.">
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/qjohO9udkRE?si=vtakeZWU69870pC9&enablejsapi=1"
@@ -474,13 +383,7 @@
                         </div>
 
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/_1LrSxkj60s?si=seCyLXerJDf_SRPZ&enablejsapi=1"
@@ -496,13 +399,7 @@
                         </div>
                         
                         <div class="video-container video-container-landscape">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Long-form conversation / podcast style content with story-driven pacing.
-                            </div> -->
+                            
                             <div class="video-player-container">
                                 <iframe
                                     src="https://www.youtube.com/embed/sHdaTcJT7Hw?si=P_2w6MEEKHJMNAhm&enablejsapi=1"
@@ -530,13 +427,7 @@
                     <button class="scroll-button scroll-left hidden" aria-label="Scroll left" data-attn="1">&lt;</button>
                     <div class="videos-scroller" tabindex="0" aria-label="Testimonials. Horizontal list, scrollable.">
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Testimonial from Alexandra about the transformation process and collaboration.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135739857?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -550,13 +441,7 @@
                             </div>
                         </div>
                         <div class="video-container">
-                            <!-- <div class="video-header">
-                                <div class="video-views">&nbsp;</div>
-                                <button class="video-info-button" type="button" aria-label="Video description">i</button>
-                            </div>
-                            <div class="video-description-text">
-                                Testimonial from Anca – authentic feedback on the experience and results.
-                            </div> -->
+                            
                             <div style="padding:177.78% 0 0 0;position:relative;">
                                 <iframe src="https://player.vimeo.com/video/1135739900?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                                         frameborder="0"
@@ -596,22 +481,10 @@
         </footer>
     </div>
 
-    <!-- COMMENTED OUT as requested: bottom-right up/down arrows -->
-    <!--
-    <div id="button-container">
-        <button id="scroll-up-button" class="scroll-button">&uarr;</button>
-        <button id="scroll-down-button" class="scroll-button">&darr;</button>
-    </div>
-    -->
+    
+    
 
-    <!-- Info overlay (click anywhere to close) -->
-    <div id="video-info-overlay" aria-hidden="true">
-        <div class="video-info-dialog" role="dialog" aria-modal="true" aria-label="Video info">
-            <div class="video-info-dialog-content"></div>
-        </div>
-    </div>
-
-    <!-- Navigation Menu -->
+    
     <button id="menu-open-button" class="hamburger-menu" aria-label="Open menu">
         <span></span>
         <span></span>
@@ -620,7 +493,7 @@
 
     <div id="menu-overlay" aria-hidden="true"></div>
     <div id="menu-container">
-        <!-- Controls row: snap toggle -->
+        
         <div id="menu-controls" class="menu-controls" role="group" aria-label="Scrolling options">
             <label class="switch">
                 <input id="snap-toggle" type="checkbox" aria-label="Snap scroll">
@@ -632,7 +505,7 @@
         <nav id="main-menu" class="main-menu">
             <ul id="menu-categories">
                 <li><a href="#home"        data-target="home">Home</a></li>
-                <!-- <li><a href="#mypicks"     data-target="mypicks">My Picks</a></li> -->
+                
                 <li><a href="#popular"     data-target="popular">Viral Content</a></li>                            
                 <li><a href="#motion"      data-target="motion">Motion Graphics</a></li>
                 <li><a href="#ugc"         data-target="ugc">UGC</a></li>

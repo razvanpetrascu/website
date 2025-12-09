@@ -1,22 +1,6 @@
-/*
-[CHANGES 2025-11-12]
-- Arrow attention animation:
-  • Runs only when arrows are in viewport; every ~5s, exactly 2 swings, then idle.
-  • Hover OR click on ANY arrow disables the attention animation for ALL arrows for the session.
-  • Pauses when offscreen; resumes when visible again.
-  • Honors prefers-reduced-motion (skips).
-- Arrow width reduction:
-  • On load, measure each arrow’s current width and set an explicit width to 50% of that,
-    preserving height and keeping glyphs crisp/centered (no squashing).
-- Removed reliance on any top overlay/shines (handled in CSS).
-- Per-video descriptions now hidden via CSS but preserved for the “i” panel source.
-- Header description (.hero-about) gets a one-time subtle fade-up on first view (reduced-motion respected).
-*/
-
 document.addEventListener('DOMContentLoaded', () => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    // --- Utilities ---
     const storage = {
         setCookie(name, value, days = 180) {
             try {
@@ -37,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scrollContainer = document.getElementById('scroll-container');
 
-    // --- SNAP TOGGLE STATE ---
     const SNAP_COOKIE = 'snapScroll';
     const readSnapPref = () => storage.getCookie(SNAP_COOKIE) || storage.getLocal(SNAP_COOKIE) || 'on';
     const applySnapPref = (state) => {
@@ -53,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fitAllVimeoToViewport();
     };
 
-    // --- Per-section snap scroll (1 category per swipe/wheel when snap is ON) ---
     const initializeSnapScrollPerSection = () => {
         if (!scrollContainer) return;
         const snapSections = Array.from(document.querySelectorAll('.snap-point'));
@@ -88,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { isAnimating = false; }, 500);
         };
 
-        // Keep index in sync when user lands on a section from other interactions
         scrollContainer.addEventListener('scroll', () => {
             if (!scrollContainer.classList.contains('snap-on')) return;
             if (isAnimating) return;
@@ -98,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 120);
         });
 
-        // Wheel: force single-step scroll between sections
         scrollContainer.addEventListener('wheel', (e) => {
             if (!scrollContainer.classList.contains('snap-on')) return;
             if (e.deltaY === 0) return;
@@ -113,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollToIndex(targetIndex);
         }, { passive: false });
 
-        // Touch: swipe up/down = single section step
         scrollContainer.addEventListener('touchstart', (e) => {
             if (!scrollContainer.classList.contains('snap-on')) return;
             if (e.touches.length !== 1) return;
@@ -125,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!scrollContainer.classList.contains('snap-on')) return;
             if (touchStartY == null) return;
             touchLastY = e.touches[0].clientY;
-            // We take over vertical scroll when snap is ON
             e.preventDefault();
         }, { passive: false });
 
@@ -144,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const threshold = 40;
 
             if (Math.abs(dy) < threshold) {
-                // Tiny movement: snap back to nearest section
                 currentIndex = findNearestIndex();
                 scrollToIndex(currentIndex);
             } else if (!isAnimating) {
@@ -162,11 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
             touchLastY = null;
         });
 
-        // Initial index
         currentIndex = findNearestIndex();
     };
 
-    // --- Hero letters (title/subtitle per your existing UX) ---
     const initializeHeroTextAnimation = () => {
         const header = document.querySelector('header#home');
         if (!header) return;
@@ -186,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapText(header.querySelector('h2'), 0.6, 'hero-char hero-char-subtitle');
     };
 
-    // --- One-shot hero-about reveal (reduced-motion aware) ---
     const initializeHeroAboutReveal = () => {
         const about = document.querySelector('.hero-about');
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -211,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         io.observe(header);
     };
 
-    // --- Video category scrollers ---
     const initializeVideoCategory = (categoryElement) => {
         const scroller = categoryElement.querySelector('.videos-scroller');
         const scrollLeftButton  = categoryElement.querySelector('.scroll-left');
@@ -261,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             videoCenters = items.map(v => v.offsetLeft + v.offsetWidth / 2);
         };
 
-        let hideLockSide = null; // 'left' | 'right' | null
+        let hideLockSide = null; 
         let hideLockTimer = null;
         const setHideLock = (side) => {
             hideLockSide = side;
@@ -334,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateButtonVisibility();
             updateEdgeFades();
             fitAllVimeoToViewport();
-            adjustArrowWidths(); // keep 50% rule consistent on responsive changes
+            adjustArrowWidths(); 
         });
 
         computeVideoCenters();
@@ -343,7 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateEdgeFades();
     };
 
-    // --- Menu & snap toggle ---
     const initializeMenu = () => {
         const openButton = document.getElementById('menu-open-button');
         const overlay = document.getElementById('menu-overlay');
@@ -397,7 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- Section observers: animations + active highlight ---
     const initializeSectionObserver = () => {
         const sections = document.querySelectorAll('.snap-point');
         if (!sections.length || !scrollContainer) return;
@@ -442,14 +413,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(s => activeObserver.observe(s));
     };
 
-    // --- Info overlay (origin-based animation from/to the "i" button) ---
     const initializeVideoInfoOverlay = () => {
         const overlay = document.getElementById('video-info-overlay');
         const dialog = overlay ? overlay.querySelector('.video-info-dialog') : null;
         const content = overlay ? overlay.querySelector('.video-info-dialog-content') : null;
         if (!overlay || !dialog || !content) return;
 
-        let lastOrigin = null; // {x, y} in viewport px
+        let lastOrigin = null; 
 
         const setOriginVars = (x, y) => {
             dialog.style.setProperty('--origin-x', `${x}px`);
@@ -470,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.setAttribute('aria-hidden', 'false');
 
             dialog.classList.remove('animate-from-origin', 'animate-to-origin');
-            void dialog.offsetWidth; // reflow to restart
+            void dialog.offsetWidth; 
             dialog.classList.add('animate-from-origin');
         };
 
@@ -513,7 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- Background parallax / twinkle / orbs ---
     const initializeBackgroundInteraction = () => {
         if (!scrollContainer) return;
         const orbs = Array.from(document.querySelectorAll('.orb'));
@@ -553,7 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- Auto-pause off-screen (native, Vimeo, YouTube) ---
     const initializeAutoPause = () => {
         const iframes = Array.from(document.querySelectorAll('iframe'));
         const nativeVideos = Array.from(document.querySelectorAll('video'));
@@ -596,7 +564,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- Vimeo vertical fit (with viewport-safe cap) ---
     const toPx = (val, basisEl) => {
         if (!val || val === 'none') return Infinity;
         const s = String(val).trim().toLowerCase();
@@ -628,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = inline.match(/padding\s*:\s*([\d.]+)%/i) || inline.match(/padding-top\s*:\s*([\d.]+)%/i);
         if (m && m[1]) {
             const pct = parseFloat(m[1]);
-            if (pct > 0) aspect = pct / 100; // height/width
+            if (pct > 0) aspect = pct / 100; 
         }
         if (!aspect) aspect = 16/9;
         container.dataset.aspect = String(aspect);
@@ -658,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerMarV= getNumber(cStyle.marginTop)  + getNumber(cStyle.marginBottom);
 
         const viewportH = scrollContainer.clientHeight;
-        const buffer = 40; // a bit more breathing room so nothing is clipped
+        const buffer = 40; 
 
         let availableH = viewportH
             - titleH
@@ -677,7 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = iframe.parentElement;
         if (!wrapper) return;
 
-        const aspect = readInitialAspectAndCache(container) || 16/9; // ≈1.777 for 9:16
+        const aspect = readInitialAspectAndCache(container) || 16/9; 
 
         const desiredW_fromHeightCap = Math.floor(availableH / aspect);
 
@@ -712,27 +679,23 @@ document.addEventListener('DOMContentLoaded', () => {
         vimeoContainers.forEach(fitVimeoInContainer);
     };
 
-    // Debounce to avoid thrash on rapid window drags
     let _resizeTimer = null;
     const debouncedVimeoReflow = () => {
         clearTimeout(_resizeTimer);
         _resizeTimer = setTimeout(() => { fitAllVimeoToViewport(); }, 100);
     };
 
-    // Observe scroller changes
     const scrollers = Array.from(document.querySelectorAll('.videos-scroller'));
     if (window.ResizeObserver) {
         const ro = new ResizeObserver(() => debouncedVimeoReflow());
         scrollers.forEach(s => ro.observe(s));
     }
 
-    // --- Attention animation for arrows (viewport-aware, 5s, 2 swings, global disable) ---
     const initializeArrowAttention = () => {
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const arrows = Array.from(document.querySelectorAll('.scroll-button'));
         if (!arrows.length || prefersReduced) return;
 
-        // Global disable flag (persist for the session)
         let attnDisabled = sessionStorage.getItem('attnDisabled') === '1';
         const disableAll = () => {
             if (attnDisabled) return;
@@ -741,8 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stopAll();
         };
 
-        // Per-arrow state
-        const state = new Map(); // el -> {visible, timer}
+        const state = new Map(); 
         const stopAll = () => {
             state.forEach(({timer}, el) => {
                 if (timer) clearInterval(timer);
@@ -751,15 +713,15 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const schedule = (el) => {
-            // clear any existing
+            
             const st = state.get(el) || {};
             if (st.timer) clearInterval(st.timer);
 
-            // start a 5s tick that triggers a 2-swing animation class
+            
             const t = setInterval(() => {
                 const s = state.get(el);
                 if (!s || !s.visible || attnDisabled) return;
-                // apply class; remove it once finished to allow retrigger
+                
                 el.classList.add('attn-swing');
                 const onEnd = () => {
                     el.classList.remove('attn-swing');
@@ -778,7 +740,6 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.remove('attn-swing');
         };
 
-        // IO to track when an arrow is actually visible
         const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const el = entry.target;
@@ -789,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (attnDisabled) { unschedule(el); return; }
 
                 if (entry.isIntersecting) {
-                    // don't trigger immediately; wait for the 5s tick
+                    
                     if (!st.timer) schedule(el);
                 } else {
                     unschedule(el);
@@ -801,35 +762,32 @@ document.addEventListener('DOMContentLoaded', () => {
             state.set(el, { visible: false, timer: null });
             io.observe(el);
 
-            // Any hover or click disables attention globally for the session
+            
             el.addEventListener('mouseenter', disableAll, { once: true });
             el.addEventListener('click', disableAll, { once: true });
         });
 
-        // Safety: sync across tabs
+        
         window.addEventListener('storage', (e) => {
             if (e.key === 'attnDisabled' && e.newValue === '1') disableAll();
         });
     };
 
-    // --- Arrow width adjustment (make 50% narrower, preserve height & glyph crispness) ---
     const adjustArrowWidths = () => {
         const arrows = Array.from(document.querySelectorAll('.scroll-button'));
         if (!arrows.length) return;
         arrows.forEach(el => {
-            // Compute current rendered width once, then fix width to 50% of that.
-            el.style.width = ''; // reset before measurement for correctness
+            
+            el.style.width = ''; 
             const rect = el.getBoundingClientRect();
-            const half = Math.max(24, Math.round(rect.width * 0.5)); // keep a sane minimum
+            const half = Math.max(24, Math.round(rect.width * 0.5)); 
             el.style.width = half + 'px';
-            // Center glyph remains intact due to flex centering in CSS.
+            
         });
     };
 
-    // --- Apply initial snap state ---
     applySnapPref(readSnapPref());
 
-    // --- Init modules ---
     initializeHeroTextAnimation();
     initializeHeroAboutReveal();
     document.querySelectorAll('.video-category').forEach(initializeVideoCategory);
@@ -840,16 +798,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeAutoPause();
     initializeSnapScrollPerSection();
 
-    // Initial fit + debounced resize wiring
     requestAnimationFrame(() => { 
         fitAllVimeoToViewport();
-        adjustArrowWidths(); // perform after first layout to capture accurate width
+        adjustArrowWidths(); 
     });
     window.addEventListener('resize', () => {
-        // adjust width on resize as layout could change around them
+        
         adjustArrowWidths();
     });
 
-    // Start arrow attention after everything else is ready
     initializeArrowAttention();
 });
